@@ -4,27 +4,35 @@ class Job:
     bookingItemId = None
     deadline = None
     userId = None
+
+
     tenantId = None
     tenantName = None
     tenantBlockId = None
     tenantBlockName = None
-    basement = None
-    status = None
+    basement = None #[b1,b2,b3...]
+
+    
+    status = None  # 1
     actualEndTime = None
     actualStartTime = None
-    locationCoordinates = None
-    assignedTo = None
+    locationCoordinates = None     #{lat: 12.123, lng: 12.123}
+
+    assignedTo = None    #worker_id
     assignedToName = None
-    estimatedStartTime = None
+    estimatedStartTime = None  # helpo function
     estimatedEndTime = None
-    estimatedDuration = None
+    estimatedDuration = None  # in seconds
     date = None
-    team = None
+
+    #ignore
+    team = None 
     servicesInfo = None
     job_type = None
     emailOnFailure = False
     notifyOnFailure = False
     stage = None
+
     vehicleId = None
     vehicleMakeName = None
     vehicleMakeId = None
@@ -37,7 +45,9 @@ class Job:
     parentJobs = []
     isSkipped = False
 
-    def __init__(self, _id, booking_item_id, deadline, user_id, tenant_id, tenant_name, tenant_block_id, tenant_block_name, basement, status, location_coordinates, assigned_to, assigned_to_name, estimated_duration, date, team, services_info, _type, email_on_failure, notify_on_failure, stage, vehicle_id, vehicle_make_name, vehicle_make_id, vehicle_model_name, vehicle_model_id, vehicle_number, vehicle_image_url, vehicle_internal_image_url, parking_location):
+
+
+    def __init__(self, _id, booking_item_id, deadline, user_id, tenant_id, tenant_name, tenant_block_id, tenant_block_name, basement, status, location_coordinates, assigned_to, assigned_to_name, estimated_duration, date, team, services_info, _type, email_on_failure, notify_on_failure, stage, vehicle_id, vehicle_make_name, vehicle_make_id, vehicle_model_name, vehicle_model_id, vehicle_number, vehicle_image_url, vehicle_internal_image_url, parking_locationgit):
         self.id = _id
         self.bookingItemId = booking_item_id
         self.deadline = deadline
