@@ -34,20 +34,23 @@ class Job:
     stage = None
 
     vehicleId = None
-    vehicleMakeName = None
-    vehicleMakeId = None
-    vehicleModelName = None
-    vehicleModelId = None
+    # vehicleMakeName = None
+    # vehicleMakeId = None
+    # vehicleModelName = None
+    # vehicleModelId = None
     vehicleNumber = None
-    vehicleImageUrl = None
-    vehicleInternalImageUrl = None
+    # vehicleImageUrl = None
+    # vehicleInternalImageUrl = None
     parkingLocation = None
-    parentJobs = []
-    isSkipped = False
+    # parentJobs = []
+    # isSkipped = False
+    isFlagged = None
+    rescheduleStreak = None
 
 
 
-    def __init__(self, _id, booking_item_id, deadline, user_id, tenant_id, tenant_name, tenant_block_id, tenant_block_name, basement, status, location_coordinates, assigned_to, assigned_to_name, estimated_duration, date, team, services_info, _type, email_on_failure, notify_on_failure, stage, vehicle_id, vehicle_make_name, vehicle_make_id, vehicle_model_name, vehicle_model_id, vehicle_number, vehicle_image_url, vehicle_internal_image_url, parking_locationgit):
+    def __init__(self, _id, booking_item_id, deadline, user_id, tenant_id, tenant_name, tenant_block_id, tenant_block_name, basement, status, location_coordinates, assigned_to, assigned_to_name, estimated_duration, date, team, services_info, _type, email_on_failure, notify_on_failure, stage, vehicle_id, vehicle_make_name, vehicle_make_id, vehicle_model_name, vehicle_model_id, vehicle_number, vehicle_image_url, vehicle_internal_image_url, parking_location, is_flagged, reschedule_streak):
+# >>>>>>> 351c3bcd17bfa16e62342ace359349cf795aee05
         self.id = _id
         self.bookingItemId = booking_item_id
         self.deadline = deadline
@@ -79,7 +82,8 @@ class Job:
         self.vehicleInternalImageUrl = vehicle_internal_image_url
         self.parkingLocation = parking_location
         self.parentJobs = []
-
+        self.isFlagged = is_flagged
+        self.rescheduleStreak = reschedule_streak
     def pr(self):
         print("deadline:", self.deadline, "job_id:", self.id, "vid:", self.vehicleId, "duration:", self.estimatedDuration)
 
