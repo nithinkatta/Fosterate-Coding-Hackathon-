@@ -57,7 +57,10 @@ class JobSheet:
 
 def get_jobs(run_date, status, tenant_id):
     jobs = []
+    print(run_date, status, tenant_id)
     docs = FIRESTORE_CLIENT.collection(u'jobs').where(u'status', u'==', status).where(u'tenantId', u'==', tenant_id).where(u'date', u'>=', run_date).where(u'date', u'<', next_date).stream()
+    # print('hello')
+    # print(type(docs))
     for doc in docs:
         job = doc.to_dict()
         try:
@@ -99,6 +102,8 @@ def get_jobs(run_date, status, tenant_id):
             )
         except Exception as e:
             print("An Error Occurred : ", e, traceback.format_exc())
+        
+    # print(jobs[0])
     return jobs
 
 
@@ -106,6 +111,8 @@ def get_available_workers(tenant_id):
     # Check with leave module
     global tenant
     tenant = FIRESTORE_CLIENT.document('tenants/' + tenant_id).get().to_dict()
+    # print("hello")
+    # print(tenant.get('workers'))
     return tenant.get('workers')
 
 
@@ -192,8 +199,8 @@ def main(payload):
         jobs = get_jobs(run_date, 1, tenant_id)    # status 1 is scheduled, status 2 is in-progress todo: make status as 1
         print("Total Jobs:", len(jobs), "Tenant Id:", tenant_id, "Run Date:", run_date)
         print("##########JOBS##########",len(jobs))
-        for job in jobs:
-            job.pr()
+        # for job in jobs:
+        #     job.pr()
         if len(jobs) > 0:
             print("##########WORKERS##########")
             for worker in worker_ids:
@@ -201,9 +208,9 @@ def main(payload):
             temp_jobs = sanitize_jobs(jobs, list(tenant['tenantBlocks'].keys()))
             # print(temp_jobs)
             scheduled_jobs = assignJobs(tenant, temp_jobs, worker_ids)
-            print("##########Scheduled JOBS##########")
-            passive_print(scheduled_jobs)
-            print("##########Creating JOB Sheets##########")
+            # print("##########Scheduled JOBS##########")
+            # passive_print(scheduled_jobs)
+            # print("##########Creating JOB Sheets##########")
             # create_job_sheets(tenant_id, scheduled_jobs)
         else:
             print("Terminating the process as there are no unscheduled jobs")
@@ -214,11 +221,17 @@ def main(payload):
 
 
 # main({"tenant_id":'jains-carlton-creek', "run_date":"25-2-2024"})
-main({"tenant_id":'poulomi-aristos', "run_date":"25-2-2024"})
-# main({"tenant_id": 'prestige-highfields', "run_date": "19-8-2023"})
+# main({"tenant_id":'poulomi-aristos', "run_date":"4-3-2024"})
+
+# main({"tenant_id":'rajapushpa-atria', "run_date":"21-3-2024"})
+main({"tenant_id": 'rainbow-vistas-rock-garden', "run_date": "21-3-2024"})
+
+# main({"tdenant_id":'poulomi-aristos', "run_date":"21-3-2024"})
+
 
 
 # def pub_main(event, context):
 #     pubsub_message = base64.b64decode(event['data']).decode('utf-8')
 #     print(pubsub_message)
-#     main(json.loads(pubsub_message))
+#     main(json.loads(pubsub_message)) poulomi-aristos
+# 
